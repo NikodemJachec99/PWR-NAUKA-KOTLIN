@@ -1,5 +1,3 @@
-
-
 # 🎓 Android Learning Platform
 
 **An interactive learning platform for mastering Android Development & Kotlin**
@@ -31,17 +29,30 @@
 
 ### Installation & Running
 
-1. **Install dependencies**:
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/NikodemJachec99/PWR-NAUKA-KOTLIN.git
+   ```
+
+2. **Navigate to the project folder**:
+   ```bash
+   cd PWR-NAUKA-KOTLIN
+   ```
+
+3. **Install dependencies**:
    ```bash
    npm install
    ```
 
-2. **Run the development server**:
+4. **Run the development server**:
    ```bash
    npm run dev
    ```
 
-3. **Open your browser** at `http://localhost:3000`
+5. **Open your browser** and navigate to:
+   ```
+   http://localhost:3000
+   ```
 
 ---
 
