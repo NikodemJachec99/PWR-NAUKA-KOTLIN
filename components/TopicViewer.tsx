@@ -61,8 +61,8 @@ const TopicViewer: React.FC<TopicViewerProps> = ({ topic, mode, setMode }) => {
     if (!topic.quiz || topic.quiz.length === 0) {
       return (
         <div className="p-8 max-w-3xl mx-auto text-center mt-20">
-          <h2 className="text-3xl font-bold text-white mb-4">No Quiz Data</h2>
-          <p className="text-slate-400 mb-8">This module does not have an active examination.</p>
+          <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-4">No Quiz Data</h2>
+          <p className="text-slate-500 dark:text-slate-400 mb-8">This module does not have an active examination.</p>
           <button
             onClick={() => setMode(ViewMode.LEARN)}
             className="px-8 py-3 bg-slate-700 text-white rounded-lg hover:bg-slate-600 font-semibold"
@@ -80,10 +80,10 @@ const TopicViewer: React.FC<TopicViewerProps> = ({ topic, mode, setMode }) => {
 
     return (
       <div className="p-8 max-w-4xl mx-auto animate-fade-in">
-        <div className="sticky top-0 z-10 bg-[#0f172a]/95 backdrop-blur-sm border-b border-slate-700 pb-4 mb-8 pt-2">
+        <div className="sticky top-0 z-10 bg-slate-50/95 dark:bg-[#0f172a]/95 backdrop-blur-sm border-b border-slate-200 dark:border-slate-700 pb-4 mb-8 pt-2">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-white">{topic.title}</h2>
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{topic.title}</h2>
               <span className="text-xs font-mono text-slate-500 uppercase tracking-widest">Question Count: {topic.quiz.length}</span>
             </div>
             {isSubmitted && (
@@ -104,14 +104,14 @@ const TopicViewer: React.FC<TopicViewerProps> = ({ topic, mode, setMode }) => {
 
           return (
             <div key={qIndex} className={`mb-8 p-6 rounded-xl border transition-all duration-300 ${showResult
-              ? isCorrect ? 'bg-emerald-900/10 border-emerald-500/50' : 'bg-red-900/10 border-red-500/50'
-              : isAnswered ? 'bg-slate-800 border-blue-500/30' : 'bg-slate-800/50 border-slate-700'
+              ? isCorrect ? 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-500/50' : 'bg-red-50 dark:bg-red-900/10 border-red-500/50'
+              : isAnswered ? 'bg-white dark:bg-slate-800 border-blue-500/30 shadow-sm' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700'
               }`}>
               <div className="flex gap-4 mb-4">
-                <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-slate-700 text-slate-300 font-mono text-sm border border-slate-600">
+                <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-mono text-sm border border-slate-300 dark:border-slate-600">
                   {qIndex + 1}
                 </span>
-                <p className="font-medium text-lg text-slate-100 pt-1 leading-relaxed">
+                <p className="font-medium text-lg text-slate-800 dark:text-slate-100 pt-1 leading-relaxed">
                   {q.question}
                 </p>
               </div>
@@ -132,7 +132,7 @@ const TopicViewer: React.FC<TopicViewerProps> = ({ topic, mode, setMode }) => {
                     if (answers[qIndex] === optIndex) {
                       optionClass += "bg-blue-600 border-blue-500 text-white shadow-lg scale-[1.01]";
                     } else {
-                      optionClass += "bg-slate-900 border-slate-700 hover:bg-slate-800 text-slate-300 hover:border-slate-500";
+                      optionClass += "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 hover:border-slate-300 dark:hover:border-slate-500";
                     }
                   }
 
@@ -196,12 +196,12 @@ const TopicViewer: React.FC<TopicViewerProps> = ({ topic, mode, setMode }) => {
   // Render Learn Mode
   return (
     <div className="max-w-4xl mx-auto p-8 animate-fade-in">
-      <header className="mb-8 border-b border-slate-700 pb-6">
+      <header className="mb-8 border-b border-slate-200 dark:border-slate-700 pb-6">
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-blue-400 text-sm font-mono uppercase tracking-wider">{topic.category}</span>
-            <h1 className="text-4xl font-bold text-white mt-2">{topic.title}</h1>
-            <p className="text-slate-400 mt-2 text-lg leading-relaxed max-w-2xl">{topic.description}</p>
+            <span className="text-blue-600 dark:text-blue-400 text-sm font-mono uppercase tracking-wider">{topic.category}</span>
+            <h1 className="text-4xl font-bold text-slate-900 dark:text-white mt-2">{topic.title}</h1>
+            <p className="text-slate-600 dark:text-slate-400 mt-2 text-lg leading-relaxed max-w-2xl">{topic.description}</p>
           </div>
           {topic.quiz && topic.quiz.length > 0 && (
             <button
@@ -216,8 +216,8 @@ const TopicViewer: React.FC<TopicViewerProps> = ({ topic, mode, setMode }) => {
       </header>
 
       {renderVisualization() && (
-        <div className="mb-12 bg-slate-900/50 p-6 rounded-2xl border border-slate-700/50 backdrop-blur-sm">
-          <h3 className="text-lg font-bold text-white mb-6 border-l-4 border-purple-500 pl-3">Interactive Simulation</h3>
+        <div className="mb-12 bg-slate-50 dark:bg-slate-900/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700/50 backdrop-blur-sm">
+          <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-6 border-l-4 border-purple-500 pl-3">Interactive Simulation</h3>
           {renderVisualization()}
         </div>
       )}
@@ -230,32 +230,32 @@ const TopicViewer: React.FC<TopicViewerProps> = ({ topic, mode, setMode }) => {
               <div className="absolute left-[15px] top-12 bottom-[-4rem] w-0.5 bg-slate-800 group-last:hidden"></div>
             )}
 
-            <h2 className="text-2xl font-semibold text-slate-100 mb-6 flex items-center sticky top-0 bg-[#0f172a] py-2 z-10">
-              <span className="w-8 h-8 rounded-full bg-slate-800 text-blue-400 flex items-center justify-center text-sm mr-4 border border-slate-700 font-mono shadow-md">
+            <h2 className="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-6 flex items-center sticky top-0 bg-slate-50 dark:bg-[#0f172a] py-2 z-10 transition-colors duration-300">
+              <span className="w-8 h-8 rounded-full bg-white dark:bg-slate-800 text-blue-600 dark:text-blue-400 flex items-center justify-center text-sm mr-4 border border-slate-200 dark:border-slate-700 font-mono shadow-md">
                 {idx + 1}
               </span>
               {section.title}
             </h2>
 
-            <div className="ml-12 prose prose-invert prose-slate max-w-none text-slate-300 leading-7 text-lg">
+            <div className="ml-12 prose prose-slate dark:prose-invert max-w-none text-slate-600 dark:text-slate-300 leading-7 text-lg">
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                  strong: ({ node, ...props }) => <strong className="text-white font-bold bg-white/5 px-1 rounded" {...props} />,
-                  table: ({ node, ...props }) => <div className="overflow-x-auto my-6 rounded-lg border border-slate-700"><table className="w-full text-left border-collapse" {...props} /></div>,
-                  thead: ({ node, ...props }) => <thead className="bg-slate-800 text-slate-200" {...props} />,
-                  tbody: ({ node, ...props }) => <tbody className="bg-slate-900/50 divide-y divide-slate-800" {...props} />,
-                  tr: ({ node, ...props }) => <tr className="hover:bg-slate-800/50 transition-colors" {...props} />,
-                  th: ({ node, ...props }) => <th className="p-4 font-semibold text-sm uppercase tracking-wider border-b border-slate-700" {...props} />,
-                  td: ({ node, ...props }) => <td className="p-4 text-sm border-r border-slate-700/50 last:border-0" {...props} />,
+                  strong: ({ node, ...props }) => <strong className="text-slate-900 dark:text-white font-bold bg-slate-100 dark:bg-white/5 px-1 rounded" {...props} />,
+                  table: ({ node, ...props }) => <div className="overflow-x-auto my-6 rounded-lg border border-slate-200 dark:border-slate-700"><table className="w-full text-left border-collapse" {...props} /></div>,
+                  thead: ({ node, ...props }) => <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200" {...props} />,
+                  tbody: ({ node, ...props }) => <tbody className="bg-white dark:bg-slate-900/50 divide-y divide-slate-200 dark:divide-slate-800" {...props} />,
+                  tr: ({ node, ...props }) => <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" {...props} />,
+                  th: ({ node, ...props }) => <th className="p-4 font-semibold text-sm uppercase tracking-wider border-b border-slate-200 dark:border-slate-700" {...props} />,
+                  td: ({ node, ...props }) => <td className="p-4 text-sm border-r border-slate-100 dark:border-slate-700/50 last:border-0" {...props} />,
                   code: ({ node, className, children, ...props }) => {
                     const match = /language-(\w+)/.exec(className || '')
                     return match ? (
-                      <div className="not-prose my-6 shadow-2xl rounded-xl overflow-hidden border border-slate-700">
+                      <div className="not-prose my-6 shadow-2xl rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700">
                         <CodeBlock code={String(children).replace(/\n$/, '')} language={match[1] as any} />
                       </div>
                     ) : (
-                      <code className="bg-slate-800 text-blue-300 px-1.5 py-0.5 rounded text-sm font-mono border border-slate-700/50" {...props}>
+                      <code className="bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-300 px-1.5 py-0.5 rounded text-sm font-mono border border-slate-200 dark:border-slate-700/50" {...props}>
                         {children}
                       </code>
                     )

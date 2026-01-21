@@ -548,19 +548,19 @@ const ExamModule: React.FC = () => {
     return (
         <div className="max-w-5xl mx-auto p-8 animate-fade-in">
             {/* Header */}
-            <header className="mb-8 border-b border-slate-700 pb-6">
+            <header className="mb-8 border-b border-slate-200 dark:border-slate-700 pb-6">
                 <div className="flex items-center justify-between flex-wrap gap-4">
                     <div>
-                        <span className="text-orange-400 text-sm font-mono uppercase tracking-wider">EXAM PREPARATION</span>
-                        <h1 className="text-4xl font-bold text-white mt-2">📝 Quiz & Theory Minimum</h1>
-                        <p className="text-slate-400 mt-2">Condensed exam material covering all 15 topics</p>
+                        <span className="text-orange-600 dark:text-orange-400 text-sm font-mono uppercase tracking-wider">EXAM PREPARATION</span>
+                        <h1 className="text-4xl font-bold text-slate-900 dark:text-white mt-2">📝 Quiz & Theory Minimum</h1>
+                        <p className="text-slate-600 dark:text-slate-400 mt-2">Condensed exam material covering all 15 topics</p>
                     </div>
                     <div className="flex gap-2">
                         <button
                             onClick={() => setMode('theory')}
                             className={`px-6 py-3 rounded-lg font-bold transition-all ${mode === 'theory'
-                                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/30'
-                                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                                ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/30'
+                                : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-transparent gap-2'
                                 }`}
                         >
                             📚 Theory
@@ -568,8 +568,8 @@ const ExamModule: React.FC = () => {
                         <button
                             onClick={() => setMode('quiz')}
                             className={`px-6 py-3 rounded-lg font-bold transition-all ${mode === 'quiz'
-                                    ? 'bg-orange-600 text-white shadow-lg shadow-orange-900/30'
-                                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                                ? 'bg-orange-600 text-white shadow-lg shadow-orange-900/30'
+                                : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-transparent gap-2'
                                 }`}
                         >
                             🎯 Quiz ({shuffledQuestions.length} Qs)
@@ -580,29 +580,29 @@ const ExamModule: React.FC = () => {
 
             {/* Theory Mode */}
             {mode === 'theory' && (
-                <div className="prose prose-invert prose-slate max-w-none">
+                <div className="prose prose-slate dark:prose-invert max-w-none">
                     <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
                         components={{
-                            h1: ({ node, ...props }) => <h1 className="text-3xl font-bold text-white mb-8 pb-4 border-b border-slate-700" {...props} />,
-                            h2: ({ node, ...props }) => <h2 className="text-2xl font-bold text-blue-400 mt-12 mb-4" {...props} />,
-                            h3: ({ node, ...props }) => <h3 className="text-xl font-semibold text-slate-200 mt-6 mb-3" {...props} />,
-                            strong: ({ node, ...props }) => <strong className="text-white font-bold bg-white/5 px-1 rounded" {...props} />,
-                            table: ({ node, ...props }) => <div className="overflow-x-auto my-6 rounded-lg border border-slate-700"><table className="w-full text-left border-collapse" {...props} /></div>,
-                            thead: ({ node, ...props }) => <thead className="bg-slate-800 text-slate-200" {...props} />,
-                            tbody: ({ node, ...props }) => <tbody className="bg-slate-900/50 divide-y divide-slate-800" {...props} />,
-                            tr: ({ node, ...props }) => <tr className="hover:bg-slate-800/50 transition-colors" {...props} />,
-                            th: ({ node, ...props }) => <th className="p-3 font-semibold text-sm border-b border-slate-700" {...props} />,
-                            td: ({ node, ...props }) => <td className="p-3 text-sm border-r border-slate-700/50 last:border-0" {...props} />,
-                            hr: ({ node, ...props }) => <hr className="border-slate-700 my-8" {...props} />,
+                            h1: ({ node, ...props }) => <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-8 pb-4 border-b border-slate-200 dark:border-slate-700" {...props} />,
+                            h2: ({ node, ...props }) => <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mt-12 mb-4" {...props} />,
+                            h3: ({ node, ...props }) => <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-200 mt-6 mb-3" {...props} />,
+                            strong: ({ node, ...props }) => <strong className="text-slate-900 dark:text-white font-bold bg-slate-100 dark:bg-white/5 px-1 rounded" {...props} />,
+                            table: ({ node, ...props }) => <div className="overflow-x-auto my-6 rounded-lg border border-slate-200 dark:border-slate-700"><table className="w-full text-left border-collapse" {...props} /></div>,
+                            thead: ({ node, ...props }) => <thead className="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200" {...props} />,
+                            tbody: ({ node, ...props }) => <tbody className="bg-white dark:bg-slate-900/50 divide-y divide-slate-200 dark:divide-slate-800" {...props} />,
+                            tr: ({ node, ...props }) => <tr className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" {...props} />,
+                            th: ({ node, ...props }) => <th className="p-3 font-semibold text-sm border-b border-slate-200 dark:border-slate-700" {...props} />,
+                            td: ({ node, ...props }) => <td className="p-3 text-sm border-r border-slate-100 dark:border-slate-700/50 last:border-0" {...props} />,
+                            hr: ({ node, ...props }) => <hr className="border-slate-200 dark:border-slate-700 my-8" {...props} />,
                             code: ({ node, className, children, ...props }) => {
                                 const match = /language-(\w+)/.exec(className || '');
                                 return match ? (
-                                    <pre className="bg-slate-900 border border-slate-700 rounded-xl p-4 my-4 overflow-x-auto">
-                                        <code className="text-sm text-slate-300 font-mono">{children}</code>
+                                    <pre className="bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-4 my-4 overflow-x-auto">
+                                        <code className="text-sm text-slate-700 dark:text-slate-300 font-mono">{children}</code>
                                     </pre>
                                 ) : (
-                                    <code className="bg-slate-800 text-blue-300 px-1.5 py-0.5 rounded text-sm font-mono" {...props}>
+                                    <code className="bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-300 px-1.5 py-0.5 rounded text-sm font-mono border border-slate-200 dark:border-transparent" {...props}>
                                         {children}
                                     </code>
                                 );
@@ -611,129 +611,131 @@ const ExamModule: React.FC = () => {
                     >
                         {EXAM_THEORY}
                     </ReactMarkdown>
-                </div>
+                </div >
             )}
 
             {/* Quiz Mode */}
-            {mode === 'quiz' && (
-                <div>
-                    {/* Score Header */}
-                    {isSubmitted && (
-                        <div className={`mb-8 p-6 rounded-xl border ${percentage >= 60 ? 'bg-emerald-900/20 border-emerald-500/50' : 'bg-red-900/20 border-red-500/50'}`}>
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <h2 className="text-2xl font-bold text-white">Results</h2>
-                                    <p className="text-slate-400">Answered {Object.keys(answers).length} of {shuffledQuestions.length} questions</p>
-                                </div>
-                                <div className="text-right">
-                                    <div className={`text-4xl font-black ${gradeColor}`}>{percentage}%</div>
-                                    <div className="text-slate-400">Score: {score} / {shuffledQuestions.length}</div>
+            {
+                mode === 'quiz' && (
+                    <div>
+                        {/* Score Header */}
+                        {isSubmitted && (
+                            <div className={`mb-8 p-6 rounded-xl border ${percentage >= 60 ? 'bg-emerald-50 dark:bg-emerald-900/20 border-emerald-500/50' : 'bg-red-50 dark:bg-red-900/20 border-red-500/50'}`}>
+                                <div className="flex items-center justify-between">
+                                    <div>
+                                        <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Results</h2>
+                                        <p className="text-slate-500 dark:text-slate-400">Answered {Object.keys(answers).length} of {shuffledQuestions.length} questions</p>
+                                    </div>
+                                    <div className="text-right">
+                                        <div className={`text-4xl font-black ${gradeColor}`}>{percentage}%</div>
+                                        <div className="text-slate-500 dark:text-slate-400">Score: {score} / {shuffledQuestions.length}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-
-                    {/* Questions */}
-                    <div className="space-y-6">
-                        {shuffledQuestions.map((q, qIndex) => {
-                            const isCorrect = answers[qIndex] === q.correctIndex;
-                            const showResult = isSubmitted;
-                            const isAnswered = answers[qIndex] !== undefined;
-
-                            return (
-                                <div
-                                    key={qIndex}
-                                    className={`p-6 rounded-xl border transition-all ${showResult
-                                            ? isCorrect ? 'bg-emerald-900/10 border-emerald-500/50' : 'bg-red-900/10 border-red-500/50'
-                                            : isAnswered ? 'bg-slate-800 border-blue-500/30' : 'bg-slate-800/50 border-slate-700'
-                                        }`}
-                                >
-                                    <div className="flex gap-4 mb-4">
-                                        <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-slate-700 text-slate-300 font-mono text-sm border border-slate-600">
-                                            {qIndex + 1}
-                                        </span>
-                                        <div className="flex-1">
-                                            <span className="text-xs font-mono text-orange-400 uppercase tracking-wider">{q.topic}</span>
-                                            <p className="font-medium text-lg text-slate-100 mt-1">{q.question}</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="pl-12 space-y-2">
-                                        {q.options.map((opt, optIndex) => {
-                                            let optionClass = "p-3 rounded-lg border-2 cursor-pointer transition-all flex items-center justify-between text-sm ";
-
-                                            if (showResult) {
-                                                if (optIndex === q.correctIndex) {
-                                                    optionClass += "bg-emerald-500/20 border-emerald-500 text-emerald-100";
-                                                } else if (answers[qIndex] === optIndex && optIndex !== q.correctIndex) {
-                                                    optionClass += "bg-red-500/20 border-red-500 text-red-100";
-                                                } else {
-                                                    optionClass += "bg-slate-900 border-transparent opacity-40";
-                                                }
-                                            } else {
-                                                if (answers[qIndex] === optIndex) {
-                                                    optionClass += "bg-blue-600 border-blue-500 text-white";
-                                                } else {
-                                                    optionClass += "bg-slate-900 border-slate-700 hover:bg-slate-800 text-slate-300";
-                                                }
-                                            }
-
-                                            return (
-                                                <div
-                                                    key={optIndex}
-                                                    onClick={() => handleOptionSelect(qIndex, optIndex)}
-                                                    className={optionClass}
-                                                >
-                                                    {opt}
-                                                    {showResult && optIndex === q.correctIndex && (
-                                                        <span className="ml-2 text-[10px] font-bold bg-emerald-500 text-black px-2 py-0.5 rounded uppercase">Correct</span>
-                                                    )}
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-
-                                    {showResult && (
-                                        <div className="mt-4 ml-12 p-4 bg-slate-900 rounded-lg border-l-4 border-blue-500 text-slate-300 text-sm">
-                                            <strong className="text-blue-400 block mb-1 uppercase text-xs">Explanation</strong>
-                                            {q.explanation}
-                                        </div>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
-
-                    {/* Submit/Retry Buttons */}
-                    <div className="flex gap-4 mt-8 pb-12">
-                        {!isSubmitted ? (
-                            <button
-                                onClick={handleSubmit}
-                                disabled={Object.keys(answers).length !== shuffledQuestions.length}
-                                className="flex-1 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white rounded-xl font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition shadow-xl"
-                            >
-                                {Object.keys(answers).length !== shuffledQuestions.length
-                                    ? `Answer all ${shuffledQuestions.length} questions to submit`
-                                    : 'Submit Exam'}
-                            </button>
-                        ) : (
-                            <button
-                                onClick={handleRetry}
-                                className="flex-1 py-4 bg-slate-700 hover:bg-slate-600 text-white rounded-xl font-bold text-lg transition border border-slate-500"
-                            >
-                                Retake Exam
-                            </button>
                         )}
-                        <button
-                            onClick={() => setMode('theory')}
-                            className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 rounded-xl font-semibold"
-                        >
-                            Review Theory
-                        </button>
+
+                        {/* Questions */}
+                        <div className="space-y-6">
+                            {shuffledQuestions.map((q, qIndex) => {
+                                const isCorrect = answers[qIndex] === q.correctIndex;
+                                const showResult = isSubmitted;
+                                const isAnswered = answers[qIndex] !== undefined;
+
+                                return (
+                                    <div
+                                        key={qIndex}
+                                        className={`p-6 rounded-xl border transition-all ${showResult
+                                            ? isCorrect ? 'bg-emerald-50 dark:bg-emerald-900/10 border-emerald-500/50' : 'bg-red-50 dark:bg-red-900/10 border-red-500/50'
+                                            : isAnswered ? 'bg-white dark:bg-slate-800 border-blue-500/30 shadow-md' : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700'
+                                            }`}
+                                    >
+                                        <div className="flex gap-4 mb-4">
+                                            <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-mono text-sm border border-slate-300 dark:border-slate-600">
+                                                {qIndex + 1}
+                                            </span>
+                                            <div className="flex-1">
+                                                <span className="text-xs font-mono text-orange-600 dark:text-orange-400 uppercase tracking-wider">{q.topic}</span>
+                                                <p className="font-medium text-lg text-slate-900 dark:text-slate-100 mt-1">{q.question}</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="pl-12 space-y-2">
+                                            {q.options.map((opt, optIndex) => {
+                                                let optionClass = "p-3 rounded-lg border-2 cursor-pointer transition-all flex items-center justify-between text-sm ";
+
+                                                if (showResult) {
+                                                    if (optIndex === q.correctIndex) {
+                                                        optionClass += "bg-emerald-500/20 border-emerald-500 text-emerald-900 dark:text-emerald-100";
+                                                    } else if (answers[qIndex] === optIndex && optIndex !== q.correctIndex) {
+                                                        optionClass += "bg-red-500/20 border-red-500 text-red-900 dark:text-red-100";
+                                                    } else {
+                                                        optionClass += "bg-white dark:bg-slate-900 border-transparent opacity-40 grayscale";
+                                                    }
+                                                } else {
+                                                    if (answers[qIndex] === optIndex) {
+                                                        optionClass += "bg-blue-600 border-blue-500 text-white shadow-md";
+                                                    } else {
+                                                        optionClass += "bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300";
+                                                    }
+                                                }
+
+                                                return (
+                                                    <div
+                                                        key={optIndex}
+                                                        onClick={() => handleOptionSelect(qIndex, optIndex)}
+                                                        className={optionClass}
+                                                    >
+                                                        {opt}
+                                                        {showResult && optIndex === q.correctIndex && (
+                                                            <span className="ml-2 text-[10px] font-bold bg-emerald-500 text-black px-2 py-0.5 rounded uppercase">Correct</span>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+
+                                        {showResult && (
+                                            <div className="mt-4 ml-12 p-4 bg-slate-100 dark:bg-slate-900 rounded-lg border-l-4 border-blue-500 text-slate-600 dark:text-slate-300 text-sm">
+                                                <strong className="text-blue-600 dark:text-blue-400 block mb-1 uppercase text-xs">Explanation</strong>
+                                                {q.explanation}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            })}
+                        </div>
+
+                        {/* Submit/Retry Buttons */}
+                        <div className="flex gap-4 mt-8 pb-12">
+                            {!isSubmitted ? (
+                                <button
+                                    onClick={handleSubmit}
+                                    disabled={Object.keys(answers).length !== shuffledQuestions.length}
+                                    className="flex-1 py-4 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white rounded-xl font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed transition shadow-xl"
+                                >
+                                    {Object.keys(answers).length !== shuffledQuestions.length
+                                        ? `Answer all ${shuffledQuestions.length} questions to submit`
+                                        : 'Submit Exam'}
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleRetry}
+                                    className="flex-1 py-4 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 text-slate-700 dark:text-white rounded-xl font-bold text-lg transition border border-slate-200 dark:border-slate-500"
+                                >
+                                    Retake Exam
+                                </button>
+                            )}
+                            <button
+                                onClick={() => setMode('theory')}
+                                className="px-8 py-4 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 rounded-xl font-semibold"
+                            >
+                                Review Theory
+                            </button>
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 };
 

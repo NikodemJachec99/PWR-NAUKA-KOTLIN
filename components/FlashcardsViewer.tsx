@@ -60,8 +60,8 @@ const FlashcardsViewer: React.FC = () => {
         return (
             <div className="flex flex-col items-center justify-center h-full p-8">
                 <div className="text-6xl mb-4">🎉</div>
-                <h2 className="text-2xl font-bold text-green-400 mb-4">Gratulacje!</h2>
-                <p className="text-slate-400 mb-6">Znasz wszystkie fiszki!</p>
+                <h2 className="text-2xl font-bold text-green-600 dark:text-green-400 mb-4">Gratulacje!</h2>
+                <p className="text-slate-500 dark:text-slate-400 mb-6">Znasz wszystkie fiszki!</p>
                 <button
                     onClick={resetProgress}
                     className="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition-colors"
@@ -77,10 +77,10 @@ const FlashcardsViewer: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-white flex items-center gap-2">
+                    <h1 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <span>📚</span> Fiszki
                     </h1>
-                    <p className="text-slate-400 text-sm mt-1">
+                    <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
                         Karta {currentIndex + 1} z {shuffledCards.length} |
                         Znasz: {knownCards.size}/{FLASHCARDS.length}
                     </p>
@@ -89,21 +89,21 @@ const FlashcardsViewer: React.FC = () => {
                     <button
                         onClick={() => setMode(mode === 'all' ? 'unknown' : 'all')}
                         className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${mode === 'unknown'
-                                ? 'bg-amber-600 text-white'
-                                : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                            ? 'bg-amber-600 text-white shadow-md'
+                            : 'bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-600 border border-slate-200 dark:border-transparent'
                             }`}
                     >
                         {mode === 'all' ? 'Wszystkie' : 'Tylko nieznane'}
                     </button>
                     <button
                         onClick={shuffleCards}
-                        className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition-colors"
+                        className="px-4 py-2 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 rounded-lg text-sm font-medium transition-colors border border-slate-200 dark:border-transparent text-slate-600 dark:text-slate-300"
                     >
                         🔀 Przetasuj
                     </button>
                     <button
                         onClick={resetProgress}
-                        className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm font-medium transition-colors"
+                        className="px-4 py-2 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 rounded-lg text-sm font-medium transition-colors border border-slate-200 dark:border-transparent text-slate-600 dark:text-slate-300"
                     >
                         🔄 Reset
                     </button>
@@ -111,7 +111,7 @@ const FlashcardsViewer: React.FC = () => {
             </div>
 
             {/* Progress bar */}
-            <div className="w-full h-2 bg-slate-700 rounded-full mb-6 overflow-hidden">
+            <div className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full mb-6 overflow-hidden">
                 <div
                     className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
                     style={{ width: `${progress}%` }}
@@ -134,32 +134,32 @@ const FlashcardsViewer: React.FC = () => {
                     >
                         {/* Front - Question */}
                         <div
-                            className="absolute w-full h-full rounded-2xl p-8 flex flex-col items-center justify-center text-center backface-hidden bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 shadow-xl"
+                            className="absolute w-full h-full rounded-2xl p-8 flex flex-col items-center justify-center text-center backface-hidden bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-xl"
                             style={{ backfaceVisibility: 'hidden' }}
                         >
-                            <div className="text-blue-400 text-sm font-semibold mb-4 uppercase tracking-wider">
+                            <div className="text-blue-600 dark:text-blue-400 text-sm font-semibold mb-4 uppercase tracking-wider">
                                 Pytanie
                             </div>
-                            <p className="text-xl text-white leading-relaxed">
+                            <p className="text-xl text-slate-900 dark:text-white leading-relaxed">
                                 {currentCard?.question}
                             </p>
-                            <div className="mt-6 text-slate-500 text-sm">
+                            <div className="mt-6 text-slate-400 dark:text-slate-500 text-sm">
                                 Kliknij, aby zobaczyć odpowiedź
                             </div>
                         </div>
 
                         {/* Back - Answer */}
                         <div
-                            className="absolute w-full h-full rounded-2xl p-8 flex flex-col items-center justify-center text-center bg-gradient-to-br from-green-900/50 to-slate-900 border border-green-700/50 shadow-xl"
+                            className="absolute w-full h-full rounded-2xl p-8 flex flex-col items-center justify-center text-center bg-green-50 dark:bg-slate-900 border border-green-200 dark:border-green-700/50 shadow-xl"
                             style={{
                                 backfaceVisibility: 'hidden',
                                 transform: 'rotateY(180deg)'
                             }}
                         >
-                            <div className="text-green-400 text-sm font-semibold mb-4 uppercase tracking-wider">
+                            <div className="text-green-600 dark:text-green-400 text-sm font-semibold mb-4 uppercase tracking-wider">
                                 Odpowiedź
                             </div>
-                            <p className="text-xl text-white leading-relaxed">
+                            <p className="text-xl text-slate-900 dark:text-white leading-relaxed">
                                 {currentCard?.answer}
                             </p>
                         </div>
@@ -172,7 +172,7 @@ const FlashcardsViewer: React.FC = () => {
                 <button
                     onClick={prevCard}
                     disabled={currentIndex === 0}
-                    className="px-6 py-3 bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium transition-colors"
+                    className="px-6 py-3 bg-white dark:bg-slate-700 hover:bg-slate-50 dark:hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium transition-colors border border-slate-200 dark:border-transparent text-slate-700 dark:text-white"
                 >
                     ← Poprzednia
                 </button>
@@ -187,16 +187,16 @@ const FlashcardsViewer: React.FC = () => {
                 <button
                     onClick={nextCard}
                     disabled={currentIndex === shuffledCards.length - 1}
-                    className="px-6 py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium transition-colors"
+                    className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-medium transition-colors shadow-md"
                 >
                     Następna →
                 </button>
             </div>
 
             {/* Keyboard hints */}
-            <div className="text-center mt-4 text-slate-500 text-sm">
-                Użyj <kbd className="px-2 py-1 bg-slate-700 rounded">Space</kbd> aby odwrócić |
-                <kbd className="px-2 py-1 bg-slate-700 rounded ml-2">←</kbd> <kbd className="px-2 py-1 bg-slate-700 rounded">→</kbd> nawigacja
+            <div className="text-center mt-4 text-slate-400 dark:text-slate-500 text-sm">
+                Użyj <kbd className="px-2 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded">Space</kbd> aby odwrócić |
+                <kbd className="px-2 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded ml-2">←</kbd> <kbd className="px-2 py-1 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded">→</kbd> nawigacja
             </div>
         </div>
     );
