@@ -4,16 +4,18 @@ import { COURSE_TOPICS } from './data/courseContent';
 import { Topic, ViewMode } from './types';
 import TopicViewer from './components/TopicViewer';
 import FlashcardsViewer from './components/FlashcardsViewer';
+import FlashcardsViewer2 from './components/FlashcardsViewer2';
 import VideoPlayer from './components/VideoPlayer';
 import ExamModule from './components/ExamModule';
 
-type AppMode = 'topics' | 'flashcards' | 'videos' | 'exam' | 'examModule';
+type AppMode = 'topics' | 'flashcards' | 'flashcards2' | 'videos' | 'exam' | 'examModule';
 
 const App: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [activeTopicId, setActiveTopicId] = useState<string>(COURSE_TOPICS[0]?.id || '');
   const [viewMode, setViewMode] = useState<ViewMode>(ViewMode.LEARN);
   const [appMode, setAppMode] = useState<AppMode>('topics');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Dynamically generate the Final Exam Topic
   const finalExamTopic: Topic = useMemo(() => {
@@ -43,30 +45,86 @@ const App: React.FC = () => {
     setAppMode('topics');
     setActiveTopicId(id);
     setViewMode(ViewMode.LEARN);
+    setSidebarOpen(false);
   };
 
   const handleExamSelect = () => {
     setAppMode('exam');
     setViewMode(ViewMode.QUIZ);
+    setSidebarOpen(false);
   };
 
   const handleFlashcardsSelect = () => {
     setAppMode('flashcards');
+    setSidebarOpen(false);
+  };
+
+  const handleFlashcards2Select = () => {
+    setAppMode('flashcards2');
+    setSidebarOpen(false);
   };
 
   const handleVideosSelect = () => {
     setAppMode('videos');
+    setSidebarOpen(false);
   };
 
   const handleExamModuleSelect = () => {
     setAppMode('examModule');
+    setSidebarOpen(false);
   };
 
   return (
     <div className="flex h-screen bg-slate-50 dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 overflow-hidden font-sans selection:bg-blue-500/30 transition-colors duration-300">
+
+      {/* Mobile Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 py-3 flex items-center justify-between">
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+          aria-label="Toggle menu"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {sidebarOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 bg-gradient-to-tr from-android-green to-blue-500 rounded-lg shadow-lg flex items-center justify-center">
+            <span className="font-mono font-bold text-black text-[10px]">PRO</span>
+          </div>
+          <h1 className="font-bold text-base tracking-tight text-slate-900 dark:text-white">Kotlin<span className="font-light opacity-70">Master</span></h1>
+        </div>
+        <button
+          onClick={toggleTheme}
+          className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+          title="Toggle Theme"
+        >
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+      </div>
+
+      {/* Mobile Overlay */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col flex-shrink-0 transition-colors duration-300">
-        <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+      <aside className={`
+        fixed lg:relative inset-y-0 left-0 z-50
+        w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 
+        flex flex-col flex-shrink-0 transition-all duration-300
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        pt-16 lg:pt-0
+      `}>
+        {/* Desktop Header */}
+        <div className="hidden lg:flex p-6 border-b border-slate-200 dark:border-slate-800 items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-gradient-to-tr from-android-green to-blue-500 rounded-lg shadow-lg flex items-center justify-center">
               <span className="font-mono font-bold text-black text-xs">PRO</span>
@@ -109,7 +167,7 @@ const App: React.FC = () => {
           {/* Exam Module Button */}
           <button
             onClick={handleExamModuleSelect}
-            className={`group w-full flex flex-col items-center justify-center gap-1 py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'examModule'
+            className={`group w-full flex flex-col items-center justify-center gap-1 py-3 lg:py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'examModule'
               ? 'bg-orange-50 dark:bg-orange-500/10 border-orange-200 dark:border-orange-500 text-orange-600 dark:text-orange-400 shadow-[0_0_20px_rgba(249,115,22,0.1)]'
               : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:border-orange-500/50 hover:text-orange-600 dark:hover:text-orange-400'
               }`}
@@ -123,7 +181,7 @@ const App: React.FC = () => {
           {/* Videos Button */}
           <button
             onClick={handleVideosSelect}
-            className={`group w-full flex flex-col items-center justify-center gap-1 py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'videos'
+            className={`group w-full flex flex-col items-center justify-center gap-1 py-3 lg:py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'videos'
               ? 'bg-red-50 dark:bg-red-500/10 border-red-200 dark:border-red-500 text-red-600 dark:text-red-400 shadow-[0_0_20px_rgba(239,68,68,0.1)]'
               : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:border-red-500/50 hover:text-red-600 dark:hover:text-red-400'
               }`}
@@ -137,7 +195,7 @@ const App: React.FC = () => {
           {/* Flashcards Button */}
           <button
             onClick={handleFlashcardsSelect}
-            className={`group w-full flex flex-col items-center justify-center gap-1 py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'flashcards'
+            className={`group w-full flex flex-col items-center justify-center gap-1 py-3 lg:py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'flashcards'
               ? 'bg-purple-50 dark:bg-purple-500/10 border-purple-200 dark:border-purple-500 text-purple-600 dark:text-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.1)]'
               : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:border-purple-500/50 hover:text-purple-600 dark:hover:text-purple-400'
               }`}
@@ -148,10 +206,24 @@ const App: React.FC = () => {
             <span className="text-[10px] uppercase tracking-wider opacity-70 z-10">90 pytań do nauki</span>
           </button>
 
+          {/* Flashcards 2 Button */}
+          <button
+            onClick={handleFlashcards2Select}
+            className={`group w-full flex flex-col items-center justify-center gap-1 py-3 lg:py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'flashcards2'
+              ? 'bg-teal-50 dark:bg-teal-500/10 border-teal-200 dark:border-teal-500 text-teal-600 dark:text-teal-400 shadow-[0_0_20px_rgba(20,184,166,0.1)]'
+              : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:border-teal-500/50 hover:text-teal-600 dark:hover:text-teal-400'
+              }`}
+          >
+            <div className="flex items-center gap-2 font-bold text-sm z-10">
+              <span className="text-lg">🧠</span> FISZKI 2
+            </div>
+            <span className="text-[10px] uppercase tracking-wider opacity-70 z-10">15 technicznych pytań</span>
+          </button>
+
           {/* Quiz Button */}
           <button
             onClick={handleExamSelect}
-            className={`group w-full flex flex-col items-center justify-center gap-1 py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'exam'
+            className={`group w-full flex flex-col items-center justify-center gap-1 py-3 lg:py-4 rounded-lg border transition-all duration-300 relative overflow-hidden ${appMode === 'exam'
               ? 'bg-amber-50 dark:bg-amber-500/10 border-amber-200 dark:border-amber-500 text-amber-600 dark:text-amber-500 shadow-[0_0_20px_rgba(245,158,11,0.1)]'
               : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-300 hover:border-amber-500/50 hover:text-amber-600 dark:hover:text-amber-400'
               }`}
@@ -165,10 +237,12 @@ const App: React.FC = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex overflow-hidden relative bg-slate-50 dark:bg-[#0f172a] transition-colors duration-300">
+      <main className="flex-1 flex overflow-hidden relative bg-slate-50 dark:bg-[#0f172a] transition-colors duration-300 pt-14 lg:pt-0">
         <div className="flex-1 overflow-y-auto scroll-smooth w-full">
           {appMode === 'flashcards' ? (
             <FlashcardsViewer />
+          ) : appMode === 'flashcards2' ? (
+            <FlashcardsViewer2 />
           ) : appMode === 'videos' ? (
             <VideoPlayer />
           ) : appMode === 'examModule' ? (
